@@ -2,6 +2,7 @@
 
 import { createClient } from "@/utils/supabase/server";
 import { SupabaseClient } from "@supabase/supabase-js";
+import { redirect } from "next/navigation";
 
 interface RequestLine {
   quantity: string;
@@ -34,6 +35,7 @@ export async function create(formData: FormData): Promise<void> {
 
       if (fetchedData) { sendRequestLines(fetchedData[0].id, data.requestLines, supabase) }
       console.log("Form submitted successfully");
+      redirect("/requests");
     } catch (error) {
       console.error("An error occurred:", error);
       // Handle error
